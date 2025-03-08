@@ -1,52 +1,30 @@
 package com.interview.patientapi;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+@Setter
+@Getter
 @Component
 public class PatientModel {
     private Long id;
+    private String firstName;
+    private String lastName;
+    private String maidenName;
     private String name;
     private int age;
     private String gender;
     private String medicalHistory;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
-        return name;
+        return String.format("%s %s %s", firstName, lastName, maidenName).trim();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getMedicalHistory() {
-        return medicalHistory;
-    }
-
-    public void setMedicalHistory(String medicalHistory) {
-        this.medicalHistory = medicalHistory;
+    public void setName(String firstName, String lastName, String maidenName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.maidenName = maidenName;
+        this.name = String.format("%s %s %s", firstName, lastName, maidenName).trim();
     }
 }

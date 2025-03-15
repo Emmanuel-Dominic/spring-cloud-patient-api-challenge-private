@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,13 +18,13 @@ public class PatientController {
 
     @GetMapping("/api/patients")
     public ResponseEntity<?> getPatients() {
-        String patients = patientService.getPatients();
+        List<PatientModel> patients = patientService.getPatients();
         Map<String, String> resp = new HashMap<>();
-        if (patients == null) {
+        if (patients == null || patients.isEmpty()) {
             resp.put("message", "No patients found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resp);
         }else{
-            return new ResponseEntity<>(patients, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(patients);
         }
     }
 }

@@ -1,28 +1,17 @@
 package com.interview.patientapi;
 
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.List;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class PatientService {
 
-    private final String apiUrl = "http://dummyjson.com/users";
-    private final WebClient webClient;
+    private final String apiUrl = "https://dummyjson.com/users";
 
-    public PatientService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl(apiUrl).build();
-    }
-
-    public List<PatientModel> getPatients() {
+    public String getPatients() {
         try{
-            PatientResponse patientResponse = webClient.get()
-                    .uri(apiUrl)
-                    .accept(MediaType.APPLICATION_JSON)
-                    .retrieve().bodyToMono(PatientResponse.class).block();
-            return patientResponse != null ? patientResponse.getUsers() : null;
+            RestTemplate restTemplate = new RestTemplate();
+            return restTemplate.getForObject(apiUrl, String.class);
         }catch (Exception e){
             return null;
         }

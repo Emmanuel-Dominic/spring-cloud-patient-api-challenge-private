@@ -1,5 +1,6 @@
 package com.interview.patientapi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +14,16 @@ import java.util.List;
 @Service
 public class PatientService {
 
+    private final RestTemplate restTemplate;
     private final String apiUrl = "https://dummyjson.com/users";
+
+    @Autowired
+    public PatientService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public List<PatientModel> getPatients() {
         try{
-            RestTemplate restTemplate = new RestTemplate();
             PatientResponse patientResponse = restTemplate.getForObject(apiUrl, PatientResponse.class);
             return patientResponse != null ? patientResponse.getUsers() : Collections.emptyList();
         }catch (Exception e){

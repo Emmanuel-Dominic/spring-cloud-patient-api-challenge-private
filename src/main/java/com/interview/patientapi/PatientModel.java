@@ -1,5 +1,6 @@
 package com.interview.patientapi;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
+@JsonSerialize(using = PatientModelSerializer.class)
 public class PatientModel {
     private Long id;
     private String name;

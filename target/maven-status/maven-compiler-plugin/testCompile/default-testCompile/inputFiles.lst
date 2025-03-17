@@ -1,4 +1,7 @@
+/Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/AppConfigTests.java
 /Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/PatientControllerTests.java
+/Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/PatientModelSerializerTests.java
 /Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/PatientModelTests.java
+/Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/PatientResponseTests.java
 /Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/PatientServiceTests.java
 /Users/helena/Desktop/spring-cloud-patient-api-challenge-private/src/test/java/com/interview/patientapi/SpringCloudPatientApiChallengeApplicationTests.java

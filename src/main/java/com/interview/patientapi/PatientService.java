@@ -33,7 +33,6 @@ public class PatientService {
 
     public Page<PatientModel> getPaginatedPatients(int page, int size) {
         try {
-            RestTemplate restTemplate = new RestTemplate();
             PatientResponse patientResponse = restTemplate.getForObject(apiUrl, PatientResponse.class);
             List<PatientModel> patients = (patientResponse != null && patientResponse.getUsers() != null)
                     ? patientResponse.getUsers()

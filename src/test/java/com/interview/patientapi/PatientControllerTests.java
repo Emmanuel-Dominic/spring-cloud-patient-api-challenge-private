@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -58,5 +60,33 @@ public class PatientControllerTests {
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         Assertions.assertInstanceOf(Map.class, response.getBody());
         Assertions.assertEquals("No patients found", ((Map<?, ?>) response.getBody()).get("message"));
+    }
+
+    @Test
+    void testGetPaginatedPatients_ReturnsOk() {
+        PatientModel patient = new PatientModel();
+        patient.setId(1L);
+        patient.setFirstName("Dominic");
+        patient.setLastName("Emmanuel");
+        patient.setAge(30);
+        patient.setGender("Male");
+
+        Page<PatientModel> pagedResponse = new PageImpl<>(List.of(patient));
+        when(patientService.getPaginatedPatients(0, 5)).thenReturn(pagedResponse);
+        ResponseEntity<?> response = patientController.getPaginatedPatients(0, 5);
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertInstanceOf(Page.class, response.getBody());
+        Assertions.assertEquals(1, ((Page<?>) response.getBody()).getTotalElements());
+    }
+
+    @Test
+    void testGetPaginatedPatients_ReturnsBadRequest() {
+        when(patientService.getPaginatedPatients(0, 5)).thenReturn(null);
+        ResponseEntity<?> response = patientController.getPaginatedPatients(0, 5);
+
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        Assertions.assertInstanceOf(Map.class, response.getBody());
+        Assertions.assertEquals("Failed to get patients", ((Map<?, ?>) response.getBody()).get("message"));
     }
 }

@@ -1,15 +1,11 @@
 package com.interview.patientapi;
 
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 
+@Setter
+@Getter
 public class PatientResponse {
     private List<PatientModel> users;
-
-    public List<PatientModel> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<PatientModel> users) {
-        this.users = users;
-    }
 }
